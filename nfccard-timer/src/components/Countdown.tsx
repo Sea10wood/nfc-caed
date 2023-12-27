@@ -31,7 +31,7 @@ const CountdownTimer: React.FC = () => {
         days,
       });
 
-      // Stop
+      
       if (distance < 0) {
         clearInterval(countdown);
         setTimer({
