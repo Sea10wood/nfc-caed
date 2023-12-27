@@ -22,13 +22,38 @@ export default function Home() {
   };
 
   useEffect(() => {
+    let wakeLock: WakeLockSentinel;
+
+    const requestWakeLock = async () => {
+      try {
+        wakeLock = await navigator.wakeLock.request("screen");
+        console.log("Wake Lock acquired");
+      } catch (err: any) {
+        if (err instanceof Error) {
+          console.error("Unable to acquire Wake Lock:", err.name, err.message);
+        } else {
+          console.error("Unable to acquire Wake Lock: Unknown error");
+        }
+      }
+    };
+    
+
     const interval = setInterval(() => {
       if (animationStart) {
         startAnimation();
       }
     }, 10000);
 
-    return () => clearInterval(interval);
+    requestWakeLock();
+
+    return () => {
+      clearInterval(interval);
+      if (wakeLock) {
+        wakeLock.release().then(() => {
+          console.log("Wake Lock released");
+        });
+      }
+    };
   }, [animationStart]);
 
   return (
