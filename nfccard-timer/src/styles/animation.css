@@ -1,0 +1,16 @@
+.transition-transform {
+  transition-property: transform;
+}
+
+.animate-slideLeftToRight {
+  animation: slideLeftToRight 10s linear;
+}
+
+@keyframes slideLeftToRight {
+  0% {
+    transform: translateX(-0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

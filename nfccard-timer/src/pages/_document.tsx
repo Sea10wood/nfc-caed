@@ -9,8 +9,8 @@ export default function Document() {
         <NextScript />
         <style jsx global>{`
           #__next {
-            height: 100%;
-            width: 100%;
+            height: 100;
+            width: 100;
           }
         `}</style>
       </body>
