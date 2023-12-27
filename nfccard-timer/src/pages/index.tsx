@@ -12,16 +12,27 @@ export default function Home() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImage(getRandomImage());
-    }, 5000);
+      setAnimationStart(true);
+      setTimeout(() => {
+        setAnimationStart(false); // 最初のアニメーション終了
+        setCurrentImage(getRandomImage());
+        setTimeout(() => {
+          setAnimationStart(true);
+        }, 1000); // 1秒後に次のアニメーションを開始
+      }, 10000); // 10秒後に最初のアニメーションを終了
+    }, 5000); // 6秒ごとにアニメーションを繰り返す
 
     return () => clearInterval(interval);
   }, [currentImage]);
 
   return (
     <div className="bg-gradient-to-b from-cyan-500 via-sky-600 to-blue-900 min-w-screen min-h-screen relative overflow-hidden">
-      <div className={`py-2 transition-opacity duration-1000 ease ${animationStart ? "opacity-100 animate-slideLeftToRight" : "opacity-0"}`}>
-        <Image src={currentImage} alt="HTTPCAT" width={100} height={100} />
+      <div
+        className={`py-2 transition-opacity duration-1000 ease ${
+          animationStart ? "opacity-100 animate-slideLeftToRight" : "opacity-0"
+        }`}
+      >
+        <Image src={currentImage} alt="HTTPCAT" width={100} height={100} className="rounded-md"/>
       </div>
       <CountdownTimer />
       <TodoItem />

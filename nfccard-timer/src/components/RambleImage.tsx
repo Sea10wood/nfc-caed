@@ -1,13 +1,64 @@
 const getRandomImage = () => {
-    const imagePaths = [
-      '/HTTPCAT/HTTP_100.avi',
-      '/HTTPCAT/HTTP_101.avi',
-      '/HTTPCAT/HTTP_102.avi',
-      
-    ];
-  
-    const randomIndex = Math.floor(Math.random() * imagePaths.length);
-    return imagePaths[randomIndex];
-  };
-  
-  export default getRandomImage;
+  const imagePaths = [
+    "/HTTPCAT/HTTP_100.avi",
+    "/HTTPCAT/HTTP_101.avi",
+    "/HTTPCAT/HTTP_102.avi",
+    "/HTTPCAT/HTTP_103.avi",
+    "/HTTPCAT/HTTP_200.avi",
+    "/HTTPCAT/HTTP_201.avi",
+    "/HTTPCAT/HTTP_202.avi",
+    "/HTTPCAT/HTTP_203.avi",
+    "/HTTPCAT/HTTP_204.avi",
+    "/HTTPCAT/HTTP_205.avi",
+    "/HTTPCAT/HTTP_206.avi",
+    "/HTTPCAT/HTTP_207.avi",
+    "/HTTPCAT/HTTP_208.avi",
+    "/HTTPCAT/HTTP_226.avi",
+    "/HTTPCAT/HTTP_302.avi",
+    "/HTTPCAT/HTTP_303.avi",
+    "/HTTPCAT/HTTP_304.avi",
+    "/HTTPCAT/HTTP_305.avi",
+    "/HTTPCAT/HTTP_307.avi",
+    "/HTTPCAT/HTTP_308.avi",
+    "/HTTPCAT/HTTP_400.avi",
+    "/HTTPCAT/HTTP_401.avi",
+    "/HTTPCAT/HTTP_402.avi",
+    "/HTTPCAT/HTTP_403.avi",
+    "/HTTPCAT/HTTP_404.avi",
+    "/HTTPCAT/HTTP_405.avi",
+    "/HTTPCAT/HTTP_406.avi",
+    "/HTTPCAT/HTTP_407.avi",
+    "/HTTPCAT/HTTP_408.avi",
+    "/HTTPCAT/HTTP_409.avi",
+    "/HTTPCAT/HTTP_410.avi",
+    "/HTTPCAT/HTTP_411.avi",
+    "/HTTPCAT/HTTP_412.avi",
+    "/HTTPCAT/HTTP_413.avi",
+    "/HTTPCAT/HTTP_414.avi",
+    "/HTTPCAT/HTTP_415.avi",
+    "/HTTPCAT/HTTP_416.avi",
+    "/HTTPCAT/HTTP_417.avi",
+    "/HTTPCAT/HTTP_418.avi",
+    "/HTTPCAT/HTTP_420.avi",
+    "/HTTPCAT/HTTP_421.avi",
+    "/HTTPCAT/HTTP_422.avi",
+    "/HTTPCAT/HTTP_423.avi",
+    "/HTTPCAT/HTTP_424.avi",
+    "/HTTPCAT/HTTP_425.avi",
+    "/HTTPCAT/HTTP_426.avi",
+    "/HTTPCAT/HTTP_428.avi",
+    "/HTTPCAT/HTTP_429.avi",
+    "/HTTPCAT/HTTP_431.avi",
+    "/HTTPCAT/HTTP_444.avi",
+    "/HTTPCAT/HTTP_450.avi",
+    "/HTTPCAT/HTTP_451.avi",
+    "/HTTPCAT/HTTP_497.avi",
+    "/HTTPCAT/HTTP_498.avi",
+    "/HTTPCAT/HTTP_499.avi",
+  ];
+
+  const randomIndex = Math.floor(Math.random() * imagePaths.length);
+  return imagePaths[randomIndex];
+};
+
+export default getRandomImage;
