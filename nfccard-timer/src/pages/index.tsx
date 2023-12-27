@@ -10,20 +10,26 @@ export default function Home() {
   const randomImagePath = getRandomImage();
   const [currentImage, setCurrentImage] = useState(getRandomImage());
 
+  const startAnimation = () => {
+    setAnimationStart(true);
+    setTimeout(() => {
+      setAnimationStart(false);
+      setCurrentImage(getRandomImage());
+      setTimeout(() => {
+        setAnimationStart(true);
+      }, 1000);
+    }, 10000);
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setAnimationStart(true);
-      setTimeout(() => {
-        setAnimationStart(false); // 最初のアニメーション終了
-        setCurrentImage(getRandomImage());
-        setTimeout(() => {
-          setAnimationStart(true);
-        }, 1000); // 1秒後に次のアニメーションを開始
-      }, 10000); // 10秒後に最初のアニメーションを終了
-    }, 5000); // 6秒ごとにアニメーションを繰り返す
+      if (animationStart) {
+        startAnimation();
+      }
+    }, 10000);
 
     return () => clearInterval(interval);
-  }, [currentImage]);
+  }, [animationStart]);
 
   return (
     <div className="bg-gradient-to-b from-cyan-500 via-sky-600 to-blue-900 min-w-screen min-h-screen relative overflow-hidden">
@@ -32,7 +38,13 @@ export default function Home() {
           animationStart ? "opacity-100 animate-slideLeftToRight" : "opacity-0"
         }`}
       >
-        <Image src={currentImage} alt="HTTPCAT" width={100} height={100} className="rounded-md"/>
+        <Image
+          src={currentImage}
+          alt="HTTPCAT"
+          width={100}
+          height={100}
+          className="rounded-md"
+        />
       </div>
       <CountdownTimer />
       <TodoItem />
@@ -40,7 +52,7 @@ export default function Home() {
       <div className="fixed right-4 bottom-12">
         <button
           onClick={() => {
-            setAnimationStart(true);
+            startAnimation();
           }}
         >
           <Image src="/cat.png" alt="cat-button" width="32" height="32" />
