@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "alpinejs": "^3.13.3",
-    "next": "^14.0.4",
+    "next": "^12.3.4",
     "react": "^18",
     "react-dom": "^18"
   },
