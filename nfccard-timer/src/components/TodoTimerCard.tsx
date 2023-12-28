@@ -5,6 +5,7 @@ export type Todo = {
   title: string;
   content: string;
   status: string;
+  addTodoOnclick: (todo: Todo) => void;
 };
 
 const TodoItem = (props: Todo): JSX.Element => {
@@ -14,20 +15,15 @@ const TodoItem = (props: Todo): JSX.Element => {
     bgColor: "",
   };
   switch (props.status) {
-    case "Done":
-      statusClassName.text = "完了";
+    case "Dangerous":
+      statusClassName.text = "やばいよ〜";
       statusClassName.textColor = "text-yellow-500";
       statusClassName.bgColor = "bg-yellow-400";
       break;
-    case "Progress":
-      statusClassName.text = "実行中";
+    case "hurry up":
+      statusClassName.text = "まぁ、まだ大丈夫";
       statusClassName.textColor = "text-blue-600";
       statusClassName.bgColor = "bg-blue-600";
-      break;
-    case "Incomplete":
-      statusClassName.text = "未対応";
-      statusClassName.textColor = "text-gray-600";
-      statusClassName.bgColor = "bg-gray-600";
       break;
   }
 

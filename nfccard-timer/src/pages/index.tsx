@@ -114,7 +114,9 @@ export default function Home() {
         />
       </div>
       <CountdownTimer />
-      <TodoItem title={"テスト"} content={"テスト"} status={"Done"} id={0}/>
+      <TodoItem title={"テスト"} content={"テスト"} status={"Dangerous"} id={0} addTodoOnclick={function (todo: Todo): void {
+        throw new Error("Function not implemented.");
+      } }/>
       <TodoListForm />
       <div className="fixed right-4 bottom-12">
         <button
