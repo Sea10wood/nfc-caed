@@ -25,8 +25,12 @@ export default function Home() {
   useEffect(() => {
     const requestWakeLock = async () => {
       try {
-        wakeLock = await navigator.wakeLock.request("screen");
-        console.log("Wake Lock acquired");
+        if (document.visibilityState === "visible") {
+          wakeLock = await navigator.wakeLock.request("screen");
+          console.log("Wake Lock acquired");
+        } else {
+          console.warn("Page is not visible. Wake Lock request skipped.");
+        }
       } catch (err: any) {
         if (err instanceof Error) {
           console.error("Unable to acquire Wake Lock:", err.name, err.message);
@@ -57,8 +61,12 @@ export default function Home() {
       }, 1000 * 60 * 60 * 5); // 5 hours
     };
 
-    requestWakeLock();
-    keepWakeLock();
+    if (document.visibilityState === "visible") {
+      requestWakeLock();
+      keepWakeLock();
+    } else {
+      console.warn("Page is not visible. Wake Lock request skipped.");
+    }
 
     return () => {
       clearInterval(interval);
