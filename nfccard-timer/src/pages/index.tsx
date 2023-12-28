@@ -9,6 +9,7 @@ export default function Home() {
   const [animationStart, setAnimationStart] = useState(false);
   const randomImagePath = getRandomImage();
   const [currentImage, setCurrentImage] = useState(getRandomImage());
+  let wakeLock: WakeLockSentinel | null = null;
 
   const startAnimation = () => {
     setAnimationStart(true);
@@ -22,8 +23,6 @@ export default function Home() {
   };
 
   useEffect(() => {
-    let wakeLock: WakeLockSentinel;
-
     const requestWakeLock = async () => {
       try {
         wakeLock = await navigator.wakeLock.request("screen");
@@ -36,7 +35,6 @@ export default function Home() {
         }
       }
     };
-    
 
     const interval = setInterval(() => {
       if (animationStart) {
@@ -44,15 +42,27 @@ export default function Home() {
       }
     }, 10000);
 
-    requestWakeLock();
-
-    return () => {
-      clearInterval(interval);
+    const releaseWakeLock = () => {
       if (wakeLock) {
         wakeLock.release().then(() => {
           console.log("Wake Lock released");
         });
+        wakeLock = null;
       }
+    };
+
+    const keepWakeLock = () => {
+      setTimeout(() => {
+        releaseWakeLock();
+      }, 1000 * 60 * 60 * 5); // 5 hours
+    };
+
+    requestWakeLock();
+    keepWakeLock();
+
+    return () => {
+      clearInterval(interval);
+      releaseWakeLock();
     };
   }, [animationStart]);
 
