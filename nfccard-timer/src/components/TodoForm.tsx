@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Todo } from "./TodoTimerCard";
+import DatePicker from "./DataPicker";
 
 type TodoFormProps = {
 	addTodoOnclick: (todo: Todo) => void;
@@ -7,8 +8,8 @@ type TodoFormProps = {
 
 const TodoForm = (props: TodoFormProps): JSX.Element => {
 	const [formTodo, setFormTodo] = useState<Todo>({
-		title: "Hello",
-		content: "World",
+		title: "",
+		content: "",
 		status: "Done",
 	});
 
@@ -33,9 +34,7 @@ const TodoForm = (props: TodoFormProps): JSX.Element => {
 	};
 
 	return (
-		<div className="w-100 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
-			<p>{formTodo.title}</p>
-			<p>{formTodo.content}</p>
+		<div className="px-12 w-[90%] justify-center  bg-white rounded-lg shadow-md dark:bg-gray-800">
 			<form onSubmit={(e) => e.preventDefault()}>
 				<div className="m-2">
 					<label className="text-gray-400">タイトル</label>
@@ -48,19 +47,14 @@ const TodoForm = (props: TodoFormProps): JSX.Element => {
 				</div>
 
 				<div className="m-2">
-					<label className="text-gray-400">内容</label>
-					<input
-						type="text"
-						value={formTodo.content}
-						onChange={handlerTodoContentFormOnChange}
-						className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-					/>
-				</div>
+          <label className="text-gray-400">締め切り日</label>
+          <DatePicker />
+        </div>
 				<div className="m-2">
 					<button
 						onClick={handlerAddTodoOnclick}
 						className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-						TODO追加
+						締め切り追加
 					</button>
 				</div>
 			</form>

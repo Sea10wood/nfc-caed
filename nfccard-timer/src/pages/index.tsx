@@ -1,13 +1,14 @@
 import CountdownTimer from "@/components/Countdown";
-import TodoItem from "@/components/TodoTimerCard";
+import TodoItem, { Todo } from "@/components/TodoTimerCard";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import getRandomImage from "@/components/RambleImage";
-import TodoItemList from "@/components/TodoItemList";
-import TodoListForm from "@/components/TodoItemList";
+import TodoForm from "@/components/TodoForm";
+import TodoListForm from "@/components/TodoListForm";
 
 export default function Home() {
   const [animationStart, setAnimationStart] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const randomImagePath = getRandomImage();
   const [currentImage, setCurrentImage] = useState(getRandomImage());
   let wakeLock: WakeLockSentinel | null = null;
@@ -21,6 +22,19 @@ export default function Home() {
         setAnimationStart(true);
       }, 1000);
     }, 10000);
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const addTodo = (todo: Todo) => {
+    // Todoを追加する処理を追加
+    closeModal();
   };
 
   useEffect(() => {
@@ -40,6 +54,7 @@ export default function Home() {
         }
       }
     };
+    requestWakeLock();
 
     const interval = setInterval(() => {
       if (animationStart) {
@@ -71,35 +86,18 @@ export default function Home() {
 
     return () => {
       clearInterval(interval);
-      releaseWakeLock();
     };
   }, [animationStart]);
-  const todoItem = {
-    title: "タイトル",
-    content: "TODO内容はここに記載します。",
-    status: "Done",
-  };
-
-  const todoItemList = [
-    {
-      title: "タイトル",
-      content: "TODO内容はここに記載します。",
-      status: "Done",
-    },
-    {
-      title: "タイトル2",
-      content: "TODO内容の二番目",
-      status: "Progress",
-    },
-    {
-      title: "タイトル3",
-      content: "TODO内容の3番目",
-      status: "Incomplete",
-    },
-  ];
 
   return (
     <div className="bg-gradient-to-b from-cyan-500 via-sky-600 to-blue-900 min-w-screen min-h-screen relative overflow-hidden">
+      <div className="bubbles">
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+      </div>
       <div
         className={`py-2 transition-opacity duration-1000 ease ${
           animationStart ? "opacity-100 animate-slideLeftToRight" : "opacity-0"
@@ -114,9 +112,6 @@ export default function Home() {
         />
       </div>
       <CountdownTimer />
-      <TodoItem {...todoItem} />
-      <TodoItem {...todoItem} />
-      <TodoListForm />
       <div className="fixed right-4 bottom-12">
         <button
           onClick={() => {
@@ -127,8 +122,20 @@ export default function Home() {
         </button>
       </div>
       <div className="fixed right-4 bottom-4">
-        <Image src="/addMark.png" alt="plus-button" width="32" height="32" />
+        <button onClick={openModal}>
+          <Image src="/addMark.png" alt="plus-button" width="32" height="32" />
+        </button>
       </div>
+
+      {/* モーダルの表示 */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <TodoForm addTodoOnclick={addTodo} />
+          <button className="absolute bottom-4 right-2" onClick={closeModal}>
+            Close
+          </button>
+        </div>
+      )}
     </div>
   );
 }
