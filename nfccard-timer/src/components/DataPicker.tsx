@@ -120,7 +120,7 @@ const DatePicker = () => {
   }, [datePickerValue]);
 
   return (
-    <div className="container px-4 py-2 mx-auto md:py-10">
+    <div className="container px-0 py-2 mx-auto md:py-10">
       <div className="w-full mb-5">
         <label
           htmlFor="datepicker"
@@ -149,7 +149,7 @@ const DatePicker = () => {
       }
     }
   }}
-  className="absolute top-0 right-4 px-3 py-2 cursor-pointer text-neutral-400 hover:text-neutral-500"
+  className="absolute top-0 right-4 px-2 py-2 cursor-pointer text-neutral-400 hover:text-neutral-500"
 >
   <svg
     className="w-6 h-6"
@@ -168,7 +168,7 @@ const DatePicker = () => {
 
           <div
             onClick={() => setDatePickerOpen(false)}
-            className="absolute top-0 left-0 max-w-lg p-4 mt-12 antialiased bg-white border rounded-lg shadow w-[17rem] border-neutral-200/70"
+            className="absolute top-[-140px] left-[280px] max-w-lg p-4  antialiased bg-white border rounded-lg shadow w-[17rem] border-neutral-200/70"
           >
             <div className="flex items-center justify-between mb-2">
               <div>
