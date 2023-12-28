@@ -6,7 +6,7 @@ import TodoForm from "./TodoForm";
 const TodoListForm = (): JSX.Element => {
   const [todoItemList, setTodoList] = useState<Todo[]>([]);
   const addTodoOnClick = (todo: Todo) => {
-    // const newTodoList = todoItemList.slice();
+  
     const newTodoList = [...todoItemList];
 
     newTodoList.push(todo);
@@ -17,9 +17,8 @@ const TodoListForm = (): JSX.Element => {
   return (
     <>
       {todoItemList.map((todo, i) => {
-        return <TodoItem key={i} {...todo} />;
+        return <TodoItem key={todo.id} {...todo} />;
       })}
-      <TodoForm addTodoOnclick={addTodoOnClick} />
     </>
   );
 };

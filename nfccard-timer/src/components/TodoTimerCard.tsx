@@ -1,6 +1,7 @@
 type Status = "Done" | "Progress" | "Incomplete";
 
 export type Todo = {
+  id: number;
   title: string;
   content: string;
   status: string;
@@ -15,8 +16,8 @@ const TodoItem = (props: Todo): JSX.Element => {
   switch (props.status) {
     case "Done":
       statusClassName.text = "完了";
-      statusClassName.textColor = "text-emerald-500";
-      statusClassName.bgColor = "bg-emerald-500";
+      statusClassName.textColor = "text-yellow-500";
+      statusClassName.bgColor = "bg-yellow-400";
       break;
     case "Progress":
       statusClassName.text = "実行中";

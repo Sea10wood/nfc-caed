@@ -9,6 +9,7 @@ import TodoListForm from "@/components/TodoListForm";
 export default function Home() {
   const [animationStart, setAnimationStart] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [todoItemList, setTodoList] = useState<Todo[]>([]);
   const randomImagePath = getRandomImage();
   const [currentImage, setCurrentImage] = useState(getRandomImage());
   let wakeLock: WakeLockSentinel | null = null;
@@ -33,10 +34,9 @@ export default function Home() {
   };
 
   const addTodo = (todo: Todo) => {
-    // Todoを追加する処理を追加
+    setTodoList((prevTodoList: Todo[]) => [...prevTodoList, todo]);
     closeModal();
   };
-
   useEffect(() => {
     const requestWakeLock = async () => {
       try {
@@ -89,6 +89,8 @@ export default function Home() {
     };
   }, [animationStart]);
 
+
+
   return (
     <div className="bg-gradient-to-b from-cyan-500 via-sky-600 to-blue-900 min-w-screen min-h-screen relative overflow-hidden">
       <div className="bubbles">
@@ -112,6 +114,8 @@ export default function Home() {
         />
       </div>
       <CountdownTimer />
+      <TodoItem title={"テスト"} content={"テスト"} status={"Done"} id={0}/>
+      <TodoListForm />
       <div className="fixed right-4 bottom-12">
         <button
           onClick={() => {

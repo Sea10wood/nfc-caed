@@ -8,6 +8,7 @@ type TodoFormProps = {
 
 const TodoForm = (props: TodoFormProps): JSX.Element => {
 	const [formTodo, setFormTodo] = useState<Todo>({
+    id:0,
 		title: "",
 		content: "",
 		status: "Done",
