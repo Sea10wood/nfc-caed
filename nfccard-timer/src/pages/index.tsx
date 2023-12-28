@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import getRandomImage from "@/components/RambleImage";
 import TodoItemList from "@/components/TodoItemList";
+import TodoListForm from "@/components/TodoItemList";
 
 export default function Home() {
   const [animationStart, setAnimationStart] = useState(false);
@@ -115,7 +116,7 @@ export default function Home() {
       <CountdownTimer />
       <TodoItem {...todoItem} />
       <TodoItem {...todoItem} />
-      <TodoItemList data={todoItemList} />
+      <TodoListForm />
       <div className="fixed right-4 bottom-12">
         <button
           onClick={() => {

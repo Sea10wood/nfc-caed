@@ -1,12 +1,12 @@
 type Status = "Done" | "Progress" | "Incomplete";
 
-export type TodoItemProps = {
+export type Todo = {
   title: string;
   content: string;
   status: string;
 };
 
-const TodoItem = (props: TodoItemProps): JSX.Element => {
+const TodoItem = (props: Todo): JSX.Element => {
   let statusClassName = {
     text: "",
     textColor: "",
