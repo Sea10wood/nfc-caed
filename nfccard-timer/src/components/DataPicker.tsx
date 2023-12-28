@@ -120,7 +120,7 @@ const DatePicker = () => {
   }, [datePickerValue]);
 
   return (
-    <div className="container px-4 py-2 mx-auto md:py-10">
+    <div className="container px-0 py-2 mx-auto md:py-10">
       <div className="w-full mb-5">
         <label
           htmlFor="datepicker"
@@ -149,7 +149,7 @@ const DatePicker = () => {
       }
     }
   }}
-  className="absolute top-0 right-4 px-3 py-2 cursor-pointer text-neutral-400 hover:text-neutral-500"
+  className="absolute top-0 right-4 px-2 py-2 cursor-pointer text-neutral-400 hover:text-neutral-500"
 >
   <svg
     className="w-6 h-6"
@@ -168,14 +168,14 @@ const DatePicker = () => {
 
           <div
             onClick={() => setDatePickerOpen(false)}
-            className="absolute top-0 left-0 max-w-lg p-4 mt-12 antialiased bg-white border rounded-lg shadow w-[17rem] border-neutral-200/70"
+            className="absolute top-[-168px] left-[280px] max-w-lg p-4  antialiased bg-white border rounded-lg shadow w-[17rem] border-neutral-200/70"
           >
             <div className="flex items-center justify-between mb-2">
               <div>
-                <span className="text-lg font-bold text-gray-800">
+                <span className="absolute left-[50px] text-lg font-bold text-gray-800 ">
                   {datePickerMonthNames[datePickerMonth]}
                 </span>
-                <span className="ml-1 text-lg font-normal text-gray-600">
+                <span className="ml-[150px] text-lg font-normal text-gray-600">
                   {datePickerYear}
                 </span>
               </div>
@@ -183,7 +183,7 @@ const DatePicker = () => {
                 <button
                   onClick={datePickerPreviousMonth}
                   type="button"
-                  className="inline-flex p-1 transition duration-100 ease-in-out rounded-full cursor-pointer focus:outline-none focus:shadow-outline hover:bg-gray-100"
+                  className="absolute top-4  left-2 transition duration-100 ease-in-out rounded-full cursor-pointer focus:outline-none focus:shadow-outline hover:bg-gray-100"
                 >
                   <svg
                     className="inline-flex w-6 h-6 text-gray-400"
@@ -199,11 +199,14 @@ const DatePicker = () => {
                     />
                   </svg>
                 </button>
-                <button
-                  onClick={datePickerNextMonth}
-                  type="button"
-                  className="inline-flex p-1 transition duration-100 ease-in-out rounded-full cursor-pointer focus:outline-none focus:shadow-outline hover:bg-gray-100"
-                >
+                <div
+            onClick={() => {
+              if (datePickerInputRef.current) {
+                datePickerInputRef.current.focus();
+              }
+            }}
+            className="absolute top-4 right-2  cursor-pointer text-neutral-400 hover:text-neutral-500"
+          >
                   <svg
                     className="inline-flex w-6 h-6 text-gray-400"
                     fill="none"
@@ -217,7 +220,8 @@ const DatePicker = () => {
                       d="M9 5l7 7-7 7"
                     />
                   </svg>
-                </button>
+                </div>
+
               </div>
             </div>
             <div className="grid grid-cols-7 mb-3">
