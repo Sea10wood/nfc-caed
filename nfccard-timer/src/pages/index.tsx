@@ -1,9 +1,9 @@
 import CountdownTimer from "@/components/Countdown";
-import TodoForm from "@/components/TodoForm";
 import TodoItem from "@/components/TodoTimerCard";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import getRandomImage from "@/components/RambleImage";
+import TodoItemList from "@/components/TodoItemList";
 
 export default function Home() {
   const [animationStart, setAnimationStart] = useState(false);
@@ -73,6 +73,29 @@ export default function Home() {
       releaseWakeLock();
     };
   }, [animationStart]);
+  const todoItem = {
+    title: "タイトル",
+    content: "TODO内容はここに記載します。",
+    status: "Done",
+  };
+
+  const todoItemList = [
+    {
+      title: "タイトル",
+      content: "TODO内容はここに記載します。",
+      status: "Done",
+    },
+    {
+      title: "タイトル2",
+      content: "TODO内容の二番目",
+      status: "Progress",
+    },
+    {
+      title: "タイトル3",
+      content: "TODO内容の3番目",
+      status: "Incomplete",
+    },
+  ];
 
   return (
     <div className="bg-gradient-to-b from-cyan-500 via-sky-600 to-blue-900 min-w-screen min-h-screen relative overflow-hidden">
@@ -90,8 +113,9 @@ export default function Home() {
         />
       </div>
       <CountdownTimer />
-      <TodoItem />
-      <TodoItem />
+      <TodoItem {...todoItem} />
+      <TodoItem {...todoItem} />
+      <TodoItemList data={todoItemList} />
       <div className="fixed right-4 bottom-12">
         <button
           onClick={() => {
