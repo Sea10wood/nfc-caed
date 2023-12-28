@@ -1,21 +1,67 @@
-const TodoForm = () => {
-  return (
-    <section className="bg-white dark:bg-gray-900">
-      <div className="max-w-3xl px-6 py-16 mx-auto text-center">
-        <div className="flex flex-col mt-8 space-y-3 sm:space-y-0 sm:flex-row sm:justify-center sm:-mx-2">
-          <input
-            id="email"
-            type="text"
-            className="px-4 py-2 text-gray-700 bg-white border rounded-md sm:mx-2 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
-            placeholder="Email Address"
-          />
+import React, { useState } from "react";
+import { Todo } from "./TodoTimerCard";
+import DatePicker from "./DataPicker";
 
-          <button className="px-4 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-700 rounded-md sm:mx-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
-            Get Started
+type TodoFormProps = {
+  addTodoOnclick: (todo: Todo) => void;
+};
+
+const TodoForm = (props: TodoFormProps): JSX.Element => {
+  const [formTodo, setFormTodo] = useState<Todo>({
+    id: 0,
+    title: "",
+    content: "",
+    status: "Done",
+  });
+
+  const handlerAddTodoOnclick = () => {
+    props.addTodoOnclick(formTodo);
+  };
+
+  const handlerTodoTitleFormOnChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const newTodo = { ...formTodo };
+    newTodo.title = event.target.value;
+    setFormTodo(newTodo);
+  };
+
+  const handlerTodoContentFormOnChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const newTodo = { ...formTodo };
+    newTodo.content = event.target.value;
+    setFormTodo(newTodo);
+  };
+
+  return (
+    <div className="px-12 w-[90%] justify-center  bg-white rounded-lg shadow-md dark:bg-gray-800">
+      <form onSubmit={(e) => e.preventDefault()}>
+        <div className="m-2">
+          <label className="text-gray-400">タイトル</label>
+          <input
+            type="text"
+            value={formTodo.title}
+            onChange={handlerTodoTitleFormOnChange}
+            className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
+        </div>
+
+        <div className="m-2">
+          <label className="text-gray-400">締め切り日</label>
+          <DatePicker />
+        </div>
+        <div className="m-2">
+          <button
+            onClick={handlerAddTodoOnclick}
+            className="flex w-full justify-center rounded-md bg-cyan-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            締め切り追加
           </button>
         </div>
-      </div>
-    </section>
+      </form>
+    </div>
   );
 };
+
 export default TodoForm;
